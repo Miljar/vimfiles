@@ -1,5 +1,5 @@
-" Make nvim faster!
-"let g:python3_host_skip_check = 1
+" nocompatible has to be the first of all ( use the real vimpower )
+set nocompatible
 
 call plug#begin('~/.vimfiles/plugged')
 

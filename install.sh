@@ -52,6 +52,15 @@ else
 	fi
 fi
 
+# symlink .gvimrc
+if [ ! -e "$HOME/.gvimrc" ]; then
+	ln -s "$PWD/.gvimrc" "$HOME/.gvimrc"
+else
+	if [ ! -L "$HOME/.gvimrc" ]; then
+		echo "WARNING: $HOME/.gvimrc exists but is not a symlink."
+	fi
+fi
+
 # symlink .ctags
 if [ ! -e "$HOME/.ctags" ]; then
 	ln -s "$PWD/.ctags" "$HOME/.ctags"
