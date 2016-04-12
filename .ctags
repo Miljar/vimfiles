@@ -1,0 +1,8 @@
+-R
+--languages=PHP
+--exclude="\.svn"
+--exclude="\.git"
+--exclude="\.hg"
+--exclude="vendor/*"
+--exclude="test*"
+--fields=+aimS
