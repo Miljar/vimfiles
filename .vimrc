@@ -106,7 +106,8 @@ cmap w!! w !sudo tee % >/dev/null
 set listchars=tab:▸\ ,eol:¬
 
 " always use system clipboard
-set clipboard+=unnamedplus
+"set clipboard+=unnamedplus
+set clipboard=unnamed
 
 
 " Shortcut to rapidly toggle `set list`:
@@ -166,14 +167,14 @@ hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
 let g:airline#extensions#hunks#non_zero_only = 1
 
-" ultisnip
+" ultisnips
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vimfiles/snippets']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vimfiles/UltiSnips']
 
 "PHPDocumentor For Vim
-let g:pdv_template_dir = $HOME ."/.vimfiles/snippets/pdv"
+let g:pdv_template_dir = $HOME ."/.vimfiles/UltiSnips/pdv"
 let g:pdv_cfg_Author = 'Tom Van Herreweghe <tom@king-foo.be>'
 let g:pdv_cfg_ClassTags = ["author"]
 nnoremap <leader><leader>d :call pdv#DocumentWithSnip()<CR>
