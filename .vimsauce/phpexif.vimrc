@@ -10,5 +10,5 @@ let g:syntastic_php_phpcs_args = '--standard=PSR2'
 let g:syntastic_php_phpcs_exec = getcwd() . '/vendor/bin/phpcs'
 let g:syntastic_php_phpmd_exec = getcwd() . '/vendor/bin/phpmd'
 
-" Padawan
-let g:padawan#composer_command = 'composer'
+" PHPUnitQF
+let g:phpunit_cmd = getcwd() . "/vendor/bin/phpunit"

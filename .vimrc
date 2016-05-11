@@ -33,7 +33,8 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-markdown'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-abolish'
 
 " PHP CODE
 Plug 'scrooloose/syntastic'
@@ -43,9 +44,11 @@ Plug 'docteurklein/vim-symfony'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'joonty/vdebug'
+Plug 'joonty/vim-phpunitqf'
 Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
 Plug 'vim-php/vim-php-refactoring', { 'for': 'php'}
 Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'shawncplus/phpcomplete.vim'
 
 call plug#end()
 
@@ -116,6 +119,9 @@ nmap <leader><leader>l :set list!<CR>
 " Shortcut to toggle NERDTree:
 nmap <leader><leader>t :NERDTreeToggle<CR>
 
+" Shortcut to run PHPUnit tests
+nmap <leader><leader>p :Test<CR>
+
 " pretty print json
 nmap <leader><leader>j :%!python -m json.tool<CR>
 
@@ -156,7 +162,7 @@ let g:syntastic_check_on_wq = 1
 
 " Supertab
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-"let g:SuperTabDefaultCompletionType = '<C-n>'
+"let g:SuperTabDefaultCompletionType = '<c-n><c-p>'
 
 " airline theme
 let g:airline_theme='molokai'
@@ -181,3 +187,26 @@ nnoremap <leader><leader>d :call pdv#DocumentWithSnip()<CR>
 
 " vim-php
 let g:php_refactor_command='/usr/local/bin/php-refactor'
+
+" phpcomplete
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': ',g',
+   \ 'jump_to_def_split': ',gs',
+   \ 'jump_to_def_vsplit': ',gv',
+   \}
+
+
+
+let s:zoom_enabled = 0
+function! ToggleZoomMode()
+    if s:zoom_enabled
+		:NERDTreeToggle
+		execute "normal \<c-w>="
+        let s:zoom_enabled = 0
+    else
+		:NERDTreeToggle
+		execute "normal \<c-w>|"
+        let s:zoom_enabled = 1
+    endif
+endfunction
+nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>

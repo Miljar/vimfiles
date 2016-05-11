@@ -1,10 +1,10 @@
 set expandtab
 set colorcolumn=120
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 map <leader><leader>a :!/usr/local/bin/ctags -f ./.vim.tags<CR>
-exec 'OpenSession vink-sylius'
+"exec 'OpenSession vink-sylius'
 exec 'NERDTree vink-sylius'
-let g:session_autosave_periodic=2
+"let g:session_autosave_periodic=2
 set tags=./.vim.tags;/
 
 let g:vdebug_options["port"] = 9000
@@ -19,4 +19,4 @@ let g:syntastic_php_phpcs_exec = getcwd() . '/bin/phpcs'
 "let g:syntastic_php_phpmd_exec = getcwd() . '/bin/phpmd'
 
 " Padawan
-let g:padawan#composer_command = 'composer'
+"let g:padawan#composer_command = 'composer'

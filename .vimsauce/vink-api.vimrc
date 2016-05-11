@@ -8,7 +8,7 @@ let g:session_autosave_periodic=2
 set tags=./.vim.tags;/
 
 let g:vdebug_options["port"] = 9000
-let g:vdebug_options["server"] = '192.168.34.103'
+let g:vdebug_options["server"] = '192.168.34.1'
 let g:vdebug_options["path_maps"] = {'/vagrant': '/Users/tom/Projects/KingFoo/Vink/vink-sales'}
 
 " syntastic
