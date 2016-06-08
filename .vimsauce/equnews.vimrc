@@ -13,3 +13,5 @@ let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_phpcs_args = '--standard=vendor/kingfoo/coding-standards/KingFooStandards/'
 let g:syntastic_php_phpcs_exec = getcwd() . '/bin/phpcs'
 let g:syntastic_php_phpmd_exec = getcwd() . '/bin/phpmd'
+
+set colorcolumn=120
