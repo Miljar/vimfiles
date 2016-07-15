@@ -35,6 +35,7 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'Raimondi/delimitMate'
 "Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-abolish'
+Plug 'terryma/vim-multiple-cursors'
 
 " PHP CODE
 Plug 'scrooloose/syntastic'
@@ -172,6 +173,22 @@ set laststatus=2
 hi clear SignColumn
 " In vim-airline, only display "hunks" if the diff is non-zero
 let g:airline#extensions#hunks#non_zero_only = 1
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled           = 1
+let g:airline#extensions#tabline#show_buffers      = 1
+let g:airline#extensions#tabline#buffer_idx_mode   = 1
+" Just filename in the tabline
+let g:airline#extensions#tabline#fnamemod          = ':t'
+" Easier tab/buffer switching
+nmap <leader>& <Plug>AirlineSelectTab1
+nmap <leader>é <Plug>AirlineSelectTab2
+nmap <leader>" <Plug>AirlineSelectTab3
+nmap <leader>' <Plug>AirlineSelectTab4
+nmap <leader>( <Plug>AirlineSelectTab5
+nmap <leader>§ <Plug>AirlineSelectTab6
+nmap <leader>è <Plug>AirlineSelectTab7
+nmap <leader>! <Plug>AirlineSelectTab8
+nmap <leader>ç <Plug>AirlineSelectTab9
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -210,3 +227,5 @@ function! ToggleZoomMode()
     endif
 endfunction
 nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>
+
+nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>'u
