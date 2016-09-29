@@ -13,6 +13,7 @@ Plug 'Shougo/unite-outline'
 
 " COLOR SCHEMES
 Plug 'tomasr/molokai'
+Plug 'jacoborus/tender'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
@@ -32,10 +33,13 @@ Plug 'joonty/vim-sauce'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-markdown'
 Plug 'rhysd/conflict-marker.vim'
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
 "Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'suan/vim-instant-markdown'
+Plug 'cohama/lexima.vim'
 
 " PHP CODE
 Plug 'scrooloose/syntastic'
@@ -55,7 +59,8 @@ call plug#end()
 
 " colorscheme options:
 "set background=dark
-colorscheme molokai
+colorscheme tender
+let macvim_skip_colorscheme=1
 let g:rehash256 = 1
 
 " Autostart stuff
@@ -166,7 +171,7 @@ let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 "let g:SuperTabDefaultCompletionType = '<c-n><c-p>'
 
 " airline theme
-let g:airline_theme='molokai'
+let g:airline_theme='tender'
 " always display airline (default is only after a split)
 set laststatus=2
 " always needed after setting colorscheme
