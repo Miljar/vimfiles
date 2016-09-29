@@ -1,12 +1,19 @@
 set expandtab
-"set columns=120
 set colorcolumn=120
-nmap <F8> :TagbarToggle<CR>
 map <leader><leader>a :!/usr/local/bin/ctags -f ./.vim.tags<CR>
-"map <leader><leader>a :!/usr/bin/find . -name "*.php" \| /usr/local/bin/ctags -f ./.vim.tags -L - -R --extra=+f --exclude="\.svn" --exclude="\.git" --exclude="\.hg" --totals=yes --tag-relative=yes --fields=+afkst --PHP-kinds=+cf<CR>
 exec 'NERDTree viata'
-exec 'OpenSession viata'
-let g:session_autosave_periodic=2
-"exec '!/usr/local/bin/ctags -R -f ./.git/tags .'
-"exec '!/usr/bin/find . -name "*.php" | /usr/local/bin/ctags -f ./.vim.tags -L - -R --extra=+f --exclude="\.svn" --exclude="\.git" --exclude="\.hg" --totals=yes --tag-relative=yes --fields=+afkst --PHP-kinds=+cf'
 set tags=./.vim.tags;/
+
+"let g:vdebug_options["port"] = 9000
+"let g:vdebug_options["server"] = '192.168.34.101'
+"let g:vdebug_options["path_maps"] = {'/vagrant': '/Users/tom/Projects/KingFoo/Vink/vink-sylius'}
+
+" syntastic
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_phpcs_args = '--standard=PSR2'
+let g:syntastic_php_phpcs_exec = getcwd() . '/bin/phpcs'
+let g:syntastic_php_phpmd_exec = getcwd() . '/bin/phpmd'
+
+let php_folding=1
+set foldmethod=syntax
+set foldnestmax=2
