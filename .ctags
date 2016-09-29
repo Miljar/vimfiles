@@ -3,6 +3,5 @@
 --exclude="\.svn"
 --exclude="\.git"
 --exclude="\.hg"
---exclude="vendor/*"
 --exclude="test*"
---fields=+aimS
+--fields=+aimlS
