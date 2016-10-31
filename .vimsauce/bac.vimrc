@@ -1,8 +1,8 @@
-exec 'NERDTree viata'
+exec 'NERDTree bac'
 
-"let g:vdebug_options["port"] = 9000
-"let g:vdebug_options["server"] = '192.168.34.101'
-"let g:vdebug_options["path_maps"] = {'/vagrant': '/Users/tom/Projects/KingFoo/Vink/vink-sylius'}
+let g:vdebug_options["port"] = 9000
+let g:vdebug_options["server"] = '192.168.33.62'
+let g:vdebug_options["path_maps"] = {'/vagrant': '/Volumes/data/Projects/Intracto/BrusselsAirport/brussels_airport_cms'}
 
 " syntastic
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']

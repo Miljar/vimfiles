@@ -40,6 +40,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'suan/vim-instant-markdown'
 Plug 'cohama/lexima.vim'
+Plug 'junegunn/vim-easy-align'
 
 " PHP CODE
 Plug 'scrooloose/syntastic'
@@ -130,6 +131,19 @@ nmap <leader><leader>p :Test<CR>
 
 " pretty print json
 nmap <leader><leader>j :%!python -m json.tool<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Custom Easy Align stuff:
+let g:easy_align_delimiters = {
+\ '$': {
+\    'pattern': '\$'
+\ }
+\}
 
 " Let the open root node be the CWD
 let NERDTreeChDirMode=2
@@ -234,3 +248,9 @@ endfunction
 nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>
 
 nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>'u
+
+" PHP stuff
+set expandtab
+set colorcolumn=120
+map <leader><leader>a :let job=job_start("/usr/local/bin/ctags -f ./.vim.tags", {"in_io": "null", "out_io": "null", "err_io": "null"})<CR>
+set tags=./.vim.tags;/
