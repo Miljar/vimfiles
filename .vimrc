@@ -14,6 +14,7 @@ Plug 'Shougo/unite-outline'
 " COLOR SCHEMES
 Plug 'tomasr/molokai'
 Plug 'jacoborus/tender'
+Plug 'lifepillar/vim-solarized8'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
@@ -45,8 +46,8 @@ Plug 'junegunn/vim-easy-align'
 " PHP CODE
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
-Plug 'evidens/vim-twig'
-Plug 'docteurklein/vim-symfony'
+"Plug 'evidens/vim-twig'
+"Plug 'docteurklein/vim-symfony'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'joonty/vdebug'
@@ -60,9 +61,9 @@ call plug#end()
 
 " colorscheme options:
 "set background=dark
-colorscheme tender
-let macvim_skip_colorscheme=1
-let g:rehash256 = 1
+colorscheme solarized8_dark
+"let macvim_skip_colorscheme=1
+"let g:rehash256 = 1
 
 " Autostart stuff
 if has("autocmd")
