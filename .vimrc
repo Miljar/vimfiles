@@ -42,6 +42,7 @@ Plug 'tpope/vim-surround'
 Plug 'suan/vim-instant-markdown'
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'matze/vim-move'
 
 " PHP CODE
 Plug 'scrooloose/syntastic'
@@ -254,4 +255,7 @@ nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>'u
 set expandtab
 set colorcolumn=120
 map <leader><leader>a :let job=job_start("/usr/local/bin/ctags -f ./.vim.tags", {"in_io": "null", "out_io": "null", "err_io": "null"})<CR>
-set tags=./.vim.tags;/
+"set tags=./.vim.tags;/
+
+" vim-move
+let g:move_key_modifier = 'C'
