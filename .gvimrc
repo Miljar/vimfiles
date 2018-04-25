@@ -4,4 +4,4 @@ if has("autocmd")
 endif
 
 " set font
-set guifont=Hack:h11
+set guifont=Hack:h12

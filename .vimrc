@@ -3,18 +3,19 @@ set nocompatible
 
 call plug#begin('~/.vimfiles/plugged')
 
-" UNITE STUFF
-Plug 'Shougo/Unite.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-"Plug 'Shougo/deoplete.nvim'
-Plug 'rstacruz/vim-fastunite'
+" Denite stuff
+Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/unite-outline'
+Plug 'iyuuya/denite-ale'
+
+" Deoplete stuff
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 " COLOR SCHEMES
-Plug 'tomasr/molokai'
-Plug 'jacoborus/tender'
 Plug 'lifepillar/vim-solarized8'
+Plug 'jacoborus/tender'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
@@ -34,8 +35,6 @@ Plug 'joonty/vim-sauce'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-markdown'
 Plug 'rhysd/conflict-marker.vim'
-"Plug 'Raimondi/delimitMate'
-"Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -43,26 +42,28 @@ Plug 'suan/vim-instant-markdown'
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
+"Plug 'kburdett/vim-nuuid.git'
 
 " PHP CODE
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'pangloss/vim-javascript'
+Plug 'evidens/vim-twig'
+Plug 'w0rp/ale'
 Plug 'ervandew/supertab'
-"Plug 'evidens/vim-twig'
-"Plug 'docteurklein/vim-symfony'
 Plug 'tobyS/vmustache'
-Plug 'tobyS/pdv'
-Plug 'joonty/vdebug'
-Plug 'joonty/vim-phpunitqf'
-Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
-Plug 'vim-php/vim-php-refactoring', { 'for': 'php'}
-Plug 'adoy/vim-php-refactoring-toolbox'
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'tobyS/pdv'
+Plug 'elythyr/pdv', { 'branch': 'improvements' }
+Plug 'joonty/vdebug', { 'branch': 'master' }
+"Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
+Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'develop' }
+Plug 'kristijanhusak/deoplete-phpactor'
 
 call plug#end()
 
 " colorscheme options:
-"set background=dark
-colorscheme solarized8_dark
+"colorscheme solarized8_dark
+set background=dark
+colorscheme solarized8
 "let macvim_skip_colorscheme=1
 "let g:rehash256 = 1
 
@@ -70,10 +71,15 @@ colorscheme solarized8_dark
 if has("autocmd")
 	au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 	au FileType json setlocal equalprg=python\ -m\ json.tool\ -\ 2>/dev/null
+    autocmd FileType php setlocal omnifunc=phpactor#Complete
+    au FileType gitcommit set tw=120
 endif
 
 " show line numbers:
 set number
+
+" enable mouse
+set mouse=a
 
 " tabs & spaces settings:
 set tabstop=4
@@ -128,9 +134,6 @@ nmap <leader><leader>l :set list!<CR>
 " Shortcut to toggle NERDTree:
 nmap <leader><leader>t :NERDTreeToggle<CR>
 
-" Shortcut to run PHPUnit tests
-nmap <leader><leader>p :Test<CR>
-
 " pretty print json
 nmap <leader><leader>j :%!python -m json.tool<CR>
 
@@ -139,6 +142,76 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Insert UUID
+nmap <Leader><Leader>U :r !uuidgen<CR>
+
+" Clear search highlights
+nmap <silent> ./ :nohlsearch<CR>
+
+" DEOPLETE
+let g:deoplete#enable_at_startup = 1
+
+" ALE
+let g:ale_completion_enabled = 0
+let g:ale_sign_column_always = 0 " sign gutter open always
+let g:airline#extensions#ale#enabled = 1 " airline integration
+
+" PHPActor
+nmap <Leader><Leader>i :call phpactor#UseAdd()<CR>
+nmap <Leader><Leader>e :call phpactor#ClassExpand()<CR>
+nmap <Leader><Leader>pp :call phpactor#ContextMenu()<CR>
+nmap <Leader><Leader>o :call phpactor#GotoDefinition()<CR>
+nmap <Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
+nmap <Leader><Leader>pfm :call phpactor#MoveFile()<CR>
+nmap <Leader><Leader>pfc :call phpactor#CopyFile()<CR>
+nmap <Leader><Leader>tt :call phpactor#Transform()<CR>
+nmap <Leader><Leader>cc :call phpactor#ClassNew()<CR>
+nmap <Leader><Leader>fr :call phpactor#FindReferences()<CR>
+vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+
+" Show information about "type" under cursor including current frame
+nnoremap <silent><Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
+
+" Denite
+  call denite#custom#option('default', {
+        \ 'prompt': '❯'
+        \ })
+
+  call denite#custom#var('file_rec', 'command',
+        \ ['rg', '--files', '--glob', '!.git', ''])
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>',
+        \'noremap')
+  call denite#custom#map('normal', '<Esc>', '<NOP>',
+        \'noremap')
+  call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
+        \'noremap')
+  call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
+        \'noremap')
+  call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
+        \'noremap')
+  call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>',
+        \'noremap')
+  call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>',
+        \'noremap')
+nnoremap <C-p> :Denite file_rec<cr>
+nnoremap <C-m> :Denite file_mru<cr>
+nnoremap <C-g> :Denite grep<cr>
+nnoremap <C-s> :DeniteCursorWord grep<cr>
+
+" GitGutter
+let g:gitgutter_sign_added = '■'
+let g:gitgutter_sign_modified = '■'
+let g:gitgutter_sign_removed = '■'
+"let g:gitgutter_sign_removed_first_line = '^^'
+"let g:gitgutter_sign_modified_removed = 'ww'
 
 " Custom Easy Align stuff:
 let g:easy_align_delimiters = {
@@ -153,38 +226,8 @@ let NERDTreeChDirMode=2
 " indent guides
 let g:indent_guides_start_level = 1
 
-" Unite file search
-let g:unite_data_directory='~/.vim/.cache/unite'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable=1
-let g:unite_prompt='» '
-let g:unite_split_rule = 'botright'
-if executable('ag')
-	let g:unite_source_grep_command='ag'
-	let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
-	let g:unite_source_grep_recursive_opt=''
-endif
-"nnoremap <silent> <space>p :Unite -auto-resize file/async file_mru file_rec/async<cr>
-call unite#custom#profile('default', 'context', {
-\ 'start_insert': 1,
-\ 'open': 'left'
-\ })
-
-
-" Syntastic
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]" "] " ignore angularjs directives as errors in the html
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
 " Supertab
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-"let g:SuperTabDefaultCompletionType = '<c-n><c-p>'
+"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 " airline theme
 let g:airline_theme='tender'
@@ -218,22 +261,11 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vimfiles/UltiSnips']
 
 "PHPDocumentor For Vim
-let g:pdv_template_dir = $HOME ."/.vimfiles/UltiSnips/pdv"
-let g:pdv_cfg_Author = 'Tom Van Herreweghe <tom@king-foo.be>'
-let g:pdv_cfg_ClassTags = ["author"]
+"let g:pdv_template_dir = $HOME ."/.vimfiles/UltiSnips/pdv"
+let g:pdv_template_dir = $HOME ."/.vimfiles/plugged/pdv/templates_snip"
+"let g:pdv_cfg_Author = 'Tom Van Herreweghe <tom@king-foo.be>'
+"let g:pdv_cfg_ClassTags = ["author"]
 nnoremap <leader><leader>d :call pdv#DocumentWithSnip()<CR>
-
-" vim-php
-let g:php_refactor_command='/usr/local/bin/php-refactor'
-
-" phpcomplete
-let g:phpcomplete_mappings = {
-   \ 'jump_to_def': ',g',
-   \ 'jump_to_def_split': ',gs',
-   \ 'jump_to_def_vsplit': ',gv',
-   \}
-
-
 
 let s:zoom_enabled = 0
 function! ToggleZoomMode()
@@ -249,13 +281,16 @@ function! ToggleZoomMode()
 endfunction
 nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>
 
-nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>'u
+nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>:nohlsearch<CR>'u
 
 " PHP stuff
 set expandtab
 set colorcolumn=120
-map <leader><leader>a :let job=job_start("/usr/local/bin/ctags -f ./.vim.tags", {"in_io": "null", "out_io": "null", "err_io": "null"})<CR>
-"set tags=./.vim.tags;/
 
 " vim-move
 let g:move_key_modifier = 'C'
+
+" Vdebug defaults
+let g:vdebug_options = {
+    \'path_maps': {'/phpapp': getcwd()}
+\}
