@@ -1,6 +1,10 @@
 " nocompatible has to be the first of all ( use the real vimpower )
 set nocompatible
 
+if has('python3')
+  silent! python3 1
+endif
+
 call plug#begin('~/.vimfiles/plugged')
 
 " Denite stuff
@@ -51,9 +55,9 @@ Plug 'evidens/vim-twig'
 Plug 'w0rp/ale'
 Plug 'ervandew/supertab'
 Plug 'tobyS/vmustache'
-"Plug 'tobyS/pdv'
-Plug 'elythyr/pdv', { 'branch': 'improvements' }
-Plug 'joonty/vdebug', { 'branch': 'master' }
+Plug 'tobyS/pdv'
+"Plug 'elythyr/pdv', { 'branch': 'improvements' }
+"Plug 'joonty/vdebug', { 'branch': 'master' }
 "Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
 Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'develop' }
 Plug 'kristijanhusak/deoplete-phpactor'
