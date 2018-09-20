@@ -1,9 +1,9 @@
 " nocompatible has to be the first of all ( use the real vimpower )
 set nocompatible
 
-if has('python3')
-  silent! python3 1
-endif
+"if has('python3')
+"  silent! python3 1
+"endif
 
 call plug#begin('~/.vimfiles/plugged')
 
@@ -59,7 +59,7 @@ Plug 'tobyS/pdv'
 "Plug 'elythyr/pdv', { 'branch': 'improvements' }
 "Plug 'joonty/vdebug', { 'branch': 'master' }
 "Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
-Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'develop' }
+Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'master' }
 Plug 'kristijanhusak/deoplete-phpactor'
 
 call plug#end()
@@ -76,7 +76,17 @@ if has("autocmd")
 	au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 	au FileType json setlocal equalprg=python\ -m\ json.tool\ -\ 2>/dev/null
     autocmd FileType php setlocal omnifunc=phpactor#Complete
-    au FileType gitcommit set tw=120
+
+    " Enable text wrapping in the format options
+    au FileType gitcommit set fo+=t
+    " Force new line after 72 chars
+    au FileType gitcommit set tw=72
+    " Show vertical line at 72+1 columns
+    au FileType gitcommit set colorcolumn=+1
+    " Add extra colored vertical line at 51 columns (for title)
+    au FileType gitcommit set colorcolumn+=51
+    " Specify some indenting options
+    au FileType gitcommit set nosmartindent
 endif
 
 " show line numbers:
@@ -231,7 +241,7 @@ let NERDTreeChDirMode=2
 let g:indent_guides_start_level = 1
 
 " Supertab
-"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 " airline theme
 let g:airline_theme='tender'
