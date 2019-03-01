@@ -10,7 +10,7 @@ call plug#begin('~/.vimfiles/plugged')
 " Denite stuff
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'iyuuya/denite-ale'
+"Plug 'iyuuya/denite-ale'
 
 " Deoplete stuff
 Plug 'Shougo/deoplete.nvim'
@@ -40,25 +40,20 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-markdown'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-abolish'
-"Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'suan/vim-instant-markdown'
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'matze/vim-move'
-"Plug 'kburdett/vim-nuuid.git'
 
 " PHP CODE
-"Plug 'scrooloose/syntastic'
 Plug 'pangloss/vim-javascript'
 Plug 'evidens/vim-twig'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'ervandew/supertab'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
-"Plug 'elythyr/pdv', { 'branch': 'improvements' }
-"Plug 'joonty/vdebug', { 'branch': 'master' }
-"Plug '2072/PHP-Indenting-for-VIm', { 'for': ['php', 'twig']}
+Plug 'vim-vdebug/vdebug'
 Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'master' }
 Plug 'kristijanhusak/deoplete-phpactor'
 
@@ -183,6 +178,7 @@ nmap <Leader><Leader>tt :call phpactor#Transform()<CR>
 nmap <Leader><Leader>cc :call phpactor#ClassNew()<CR>
 nmap <Leader><Leader>fr :call phpactor#FindReferences()<CR>
 vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+nmap <Leader><leader>h :call phpactor#Hover()<CR>
 
 " Show information about "type" under cursor including current frame
 nnoremap <silent><Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
