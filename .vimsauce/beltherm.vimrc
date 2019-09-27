@@ -1,4 +1,4 @@
-exec 'NERDTree argus-code'
+exec 'NERDTree beltherm-code'
 
 " syntastic
 "let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
@@ -7,7 +7,7 @@ exec 'NERDTree argus-code'
 "let g:syntastic_php_phpmd_exec = getcwd() . '/../denp-infra/bin/php vendor/bin/phpmd'
 
 " ALE - PHPSTAN
-let g:ale_php_phpstan_level = 1
+"let g:ale_php_phpstan_level = 1
 "let g:ale_linters = ['phpcs', 'phpstan']
 
 " ALE - PHPCS

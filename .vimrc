@@ -10,21 +10,23 @@ call plug#begin('~/.vimfiles/plugged')
 " Denite stuff
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-"Plug 'iyuuya/denite-ale'
+Plug 'iyuuya/denite-ale'
 
 " Deoplete stuff
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', {'tag' : '5.1'}
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
 " COLOR SCHEMES
 Plug 'lifepillar/vim-solarized8'
 Plug 'jacoborus/tender'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
+Plug 'troydm/zoomwintab.vim'
 
 " SEARCH
 Plug 'rking/ag.vim'
@@ -49,7 +51,7 @@ Plug 'matze/vim-move'
 " PHP CODE
 Plug 'pangloss/vim-javascript'
 Plug 'evidens/vim-twig'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'ervandew/supertab'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
@@ -62,7 +64,8 @@ call plug#end()
 " colorscheme options:
 "colorscheme solarized8_dark
 set background=dark
-colorscheme solarized8
+"colorscheme solarized8
+colorscheme hybrid_material
 "let macvim_skip_colorscheme=1
 "let g:rehash256 = 1
 
@@ -82,7 +85,28 @@ if has("autocmd")
     au FileType gitcommit set colorcolumn+=51
     " Specify some indenting options
     au FileType gitcommit set nosmartindent
+
+
+
+    au FileType denite call s:denite_my_settings()
 endif
+
+function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR>
+                \ denite#do_map('do_action')
+"    nnoremap <silent><buffer><expr> d
+"                \ denite#do_map('do_action', 'delete')
+"    nnoremap <silent><buffer><expr> p
+"                \ denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q
+                \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i
+                \ denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space>
+                \ denite#do_map('toggle_select').'j'
+    nnoremap <silent><buffer><expr> <C-v>
+                \ denite#do_map('do_action', 'vsplit')
+endfunction
 
 " show line numbers:
 set number
@@ -133,8 +157,8 @@ cmap w!! w !sudo tee % >/dev/null
 set listchars=tab:▸\ ,eol:¬
 
 " always use system clipboard
-"set clipboard+=unnamedplus
-set clipboard=unnamed
+set clipboard+=unnamedplus
+"set clipboard=unnamed
 
 
 " Shortcut to rapidly toggle `set list`:
@@ -188,7 +212,7 @@ nnoremap <silent><Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
         \ 'prompt': '❯'
         \ })
 
-  call denite#custom#var('file_rec', 'command',
+  call denite#custom#var('file/rec', 'command',
         \ ['rg', '--files', '--glob', '!.git', ''])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
@@ -201,18 +225,19 @@ nnoremap <silent><Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
         \'noremap')
   call denite#custom#map('normal', '<Esc>', '<NOP>',
         \'noremap')
-  call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
-        \'noremap')
-  call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
-        \'noremap')
+"  call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
+"        \'noremap')
+"  call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
+"        \'noremap')
   call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
         \'noremap')
   call denite#custom#map('normal', '<Down>', '<denite:move_to_next_line>',
         \'noremap')
   call denite#custom#map('normal', '<Up>', '<denite:move_to_previous_line>',
         \'noremap')
-nnoremap <C-p> :Denite file_rec<cr>
+nnoremap <C-p> :Denite file/rec<cr>
 nnoremap <C-m> :Denite file_mru<cr>
+nnoremap <C-b> :Denite buffer<cr>
 nnoremap <C-g> :Denite grep<cr>
 nnoremap <C-s> :DeniteCursorWord grep<cr>
 
@@ -240,7 +265,8 @@ let g:indent_guides_start_level = 1
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 " airline theme
-let g:airline_theme='tender'
+"let g:airline_theme='tender'
+let g:airline_theme='hybrid'
 " always display airline (default is only after a split)
 set laststatus=2
 " always needed after setting colorscheme
@@ -277,19 +303,20 @@ let g:pdv_template_dir = $HOME ."/.vimfiles/plugged/pdv/templates_snip"
 "let g:pdv_cfg_ClassTags = ["author"]
 nnoremap <leader><leader>d :call pdv#DocumentWithSnip()<CR>
 
-let s:zoom_enabled = 0
-function! ToggleZoomMode()
-    if s:zoom_enabled
-		:NERDTreeToggle
-		execute "normal \<c-w>="
-        let s:zoom_enabled = 0
-    else
-		:NERDTreeToggle
-		execute "normal \<c-w>|"
-        let s:zoom_enabled = 1
-    endif
-endfunction
-nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>
+"let s:zoom_enabled = 0
+"function! ToggleZoomMode()
+"    if s:zoom_enabled
+"		:NERDTreeToggle
+"		execute "normal \<c-w>="
+"        let s:zoom_enabled = 0
+"    else
+"		:NERDTreeToggle
+"		execute "normal \<c-w>|"
+"        let s:zoom_enabled = 1
+"    endif
+"endfunction
+"nmap <leader><leader>z :call ToggleZoomMode()<CR><CR>
+nmap <leader><leader>z :call ZoomWinTabToggle()<CR><CR>
 
 nmap <leader><leader>su mugg/use<CR>vip:sort u<CR>:nohlsearch<CR>'u
 

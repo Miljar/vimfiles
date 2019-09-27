@@ -13,10 +13,6 @@ if [[ "$os" == "Darwin" ]]; then
     fi
 
     brew install macvim
-
-    # better php ctags:
-    curl https://raw.githubusercontent.com/shawncplus/phpcomplete.vim/master/misc/ctags-better-php.rb > /usr/local/Library/Formula/ctags-better-php.rb
-    brew install ctags-better-php
 elif [[ "$os" == "Linux" ]]; then
     echo "Install vim from your os repositories"
     echo ""
@@ -58,15 +54,6 @@ if [ ! -e "$HOME/.gvimrc" ]; then
 else
 	if [ ! -L "$HOME/.gvimrc" ]; then
 		echo "WARNING: $HOME/.gvimrc exists but is not a symlink."
-	fi
-fi
-
-# symlink .ctags
-if [ ! -e "$HOME/.ctags" ]; then
-	ln -s "$PWD/.ctags" "$HOME/.ctags"
-else
-	if [ ! -L "$HOME/.ctags" ]; then
-		echo "WARNING: $HOME/.ctags exists but is not a symlink."
 	fi
 fi
 
