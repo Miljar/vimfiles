@@ -1,10 +1,6 @@
 " nocompatible has to be the first of all ( use the real vimpower )
 set nocompatible
 
-"if has('python3')
-"  silent! python3 1
-"endif
-
 call plug#begin('~/.vimfiles/plugged')
 
 " Denite stuff
@@ -13,14 +9,14 @@ Plug 'Shougo/neomru.vim'
 Plug 'iyuuya/denite-ale'
 
 " Deoplete stuff
-Plug 'Shougo/deoplete.nvim', {'tag' : '5.1'}
+Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
 " COLOR SCHEMES
 Plug 'lifepillar/vim-solarized8'
 Plug 'jacoborus/tender'
-Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'kristijanhusak/vim-hybrid-material'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
@@ -55,19 +51,15 @@ Plug 'w0rp/ale'
 Plug 'ervandew/supertab'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
-Plug 'vim-vdebug/vdebug'
+"Plug 'vim-vdebug/vdebug'
 Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'master' }
 Plug 'kristijanhusak/deoplete-phpactor'
 
 call plug#end()
 
 " colorscheme options:
-"colorscheme solarized8_dark
 set background=dark
-"colorscheme solarized8
-colorscheme hybrid_material
-"let macvim_skip_colorscheme=1
-"let g:rehash256 = 1
+colorscheme solarized8
 
 " Autostart stuff
 if has("autocmd")
@@ -192,12 +184,11 @@ let g:airline#extensions#ale#enabled = 1 " airline integration
 
 " PHPActor
 nmap <Leader><Leader>i :call phpactor#UseAdd()<CR>
+nmap <Leader><Leader>n :call phpactor#Navigate()<CR>
 nmap <Leader><Leader>e :call phpactor#ClassExpand()<CR>
 nmap <Leader><Leader>pp :call phpactor#ContextMenu()<CR>
 nmap <Leader><Leader>o :call phpactor#GotoDefinition()<CR>
 nmap <Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
-nmap <Leader><Leader>pfm :call phpactor#MoveFile()<CR>
-nmap <Leader><Leader>pfc :call phpactor#CopyFile()<CR>
 nmap <Leader><Leader>tt :call phpactor#Transform()<CR>
 nmap <Leader><Leader>cc :call phpactor#ClassNew()<CR>
 nmap <Leader><Leader>fr :call phpactor#FindReferences()<CR>
@@ -214,9 +205,10 @@ nnoremap <silent><Leader><Leader>pd :call phpactor#OffsetTypeInfo()<CR>
 
   call denite#custom#var('file/rec', 'command',
         \ ['rg', '--files', '--glob', '!.git', ''])
+
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
-        \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+        \ ['-i', '--vimgrep', '--no-heading'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
   call denite#custom#var('grep', 'separator', ['--'])
