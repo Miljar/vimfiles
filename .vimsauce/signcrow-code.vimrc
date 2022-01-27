@@ -1,8 +1,4 @@
-exec 'NERDTree aphpostle'
-
-"let g:vdebug_options["port"] = 9000
-"let g:vdebug_options["server"] = '192.168.65.2'
-"let g:vdebug_options["path_maps"] = {'/phpapp': '/Users/tom/Code/Dx/denp/denp-code'}
+exec 'NERDTree signcrow-code'
 
 " syntastic
 "let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
@@ -12,13 +8,18 @@ exec 'NERDTree aphpostle'
 
 " ALE - PHPSTAN
 let g:ale_php_phpstan_level = 1
+"let g:ale_linters = ['phpcs', 'phpstan']
 
 " ALE - PHPCS
 let g:ale_php_phpcs_standard = 'PSR2'
 
+let g:ale_completion_enabled = 0
+
+
 " PHPActor
 " Specify a different PHP binary to use when calling Phpactor
-" let g:phpactorPhpBin = getcwd() . '/../denp-infra/bin/php'
+let g:phpactorPhpBin = '/usr/bin/php'
+"let g:phpactorPhpBin = getcwd() . '/../denp-infra/bin/php'
 
 
 "let php_folding=1

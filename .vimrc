@@ -15,14 +15,15 @@ Plug 'roxma/vim-hug-neovim-rpc'
 
 " COLOR SCHEMES
 Plug 'lifepillar/vim-solarized8'
-Plug 'jacoborus/tender'
+"Plug 'jacoborus/tender'
+"Plug 'arcticicestudio/nord-vim'
 "Plug 'kristijanhusak/vim-hybrid-material'
 
 " UI STUFF
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
-Plug 'troydm/zoomwintab.vim'
+"Plug 'troydm/zoomwintab.vim'
 
 " SEARCH
 Plug 'rking/ag.vim'
@@ -34,7 +35,7 @@ Plug 'junegunn/gv.vim'
 
 " UTILITIES
 Plug 'joonty/vim-sauce'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-markdown'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-abolish'
@@ -52,13 +53,14 @@ Plug 'ervandew/supertab'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 "Plug 'vim-vdebug/vdebug'
-Plug 'phpactor/phpactor', { 'do': 'composer install', 'branch': 'master' }
+Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
 Plug 'kristijanhusak/deoplete-phpactor'
 
 call plug#end()
 
 " colorscheme options:
 set background=dark
+"colorscheme nord
 colorscheme solarized8
 
 " Autostart stuff
@@ -77,6 +79,10 @@ if has("autocmd")
     au FileType gitcommit set colorcolumn+=51
     " Specify some indenting options
     au FileType gitcommit set nosmartindent
+
+    au FileType js set sw=2 ts=2 softtabstop=2
+    au FileType javascript set sw=2 ts=2 softtabstop=2
+    au FileType php set sw=4 ts=4 softtabstop=4
 
 
 

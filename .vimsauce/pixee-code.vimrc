@@ -1,4 +1,4 @@
-exec 'NERDTree beltherm-code'
+exec 'NERDTree pixee-code'
 
 " syntastic
 "let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
@@ -7,7 +7,7 @@ exec 'NERDTree beltherm-code'
 "let g:syntastic_php_phpmd_exec = getcwd() . '/../denp-infra/bin/php vendor/bin/phpmd'
 
 " ALE - PHPSTAN
-"let g:ale_php_phpstan_level = 1
+let g:ale_php_phpstan_level = 1
 "let g:ale_linters = ['phpcs', 'phpstan']
 
 " ALE - PHPCS
@@ -25,5 +25,3 @@ let g:phpactorPhpBin = '/usr/bin/php'
 "let php_folding=1
 "set foldmethod=syntax
 "set foldnestmax=2
-
-"set tags=.vim.tags
